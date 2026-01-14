@@ -122,10 +122,32 @@ The notebook includes:
 
 ---
 
-## How to Run (VS Code / Jupyter)
+## Notes / Assumptions
+The analysis focuses on **completed sales**:
+- Canceled invoices (`InvoiceNo` starting with `"C"`) are excluded
+- Invalid transactions (Quantity ≤ 0 or UnitPrice ≤ 0) are excluded
 
-### 1) Install dependencies
-Create a virtual environment and install requirements:
+RFM is computed at the **CustomerID grain**:
+- **Recency:** days since last purchase (relative to snapshot date)
+- **Frequency:** unique invoices (transaction count)
+- **Monetary:** total revenue (£)
 
-```bash
-pip install -r requirements.txt
+Spend behavior is **heavy-tailed** (few customers contribute outsized revenue), so some plots use **log scaling** for interpretability.
+
+---
+
+## Next Improvements (optional, future work)
+- Cohort retention analysis by first purchase month (repeat behavior tracking)
+- Profit-aware segmentation if margin/cost data becomes available
+- Segment-level A/B testing plan for retention and win-back campaigns
+- Convert notebook into a reproducible pipeline (script + outputs + report)
+
+---
+
+## Author
+**Arsalan Ahmed**  
+Repository: `ecommerce-customer-segmentation-rfm-deciles`
+
+
+
+
