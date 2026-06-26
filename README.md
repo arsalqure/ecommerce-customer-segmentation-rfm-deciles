@@ -50,7 +50,7 @@ The pipeline goes from raw CSV to decision-ready marketing segments, validated b
 | Columns | 8 |
 | Date range | Dec 2010 – Dec 2011 |
 | Customers analysed | **4,334** |
-| Cleaned revenue | **£8,767,752** |
+| Cleaned revenue | **£8,743,914** |
 
 </td>
 <td width="50%">
@@ -59,9 +59,9 @@ The pipeline goes from raw CSV to decision-ready marketing segments, validated b
 | Slice | Revenue Share |
 |-------|--------------|
 | Top 10% of customers | **61.4%** |
-| Top 20% of customers | **74.5%** |
-| Champions segment (7.4% of base) | **49.7%** |
-| Decile 1 alone | **~45%+** |
+| Top 20% of customers | **74.6%** |
+| Champions segment (7.4% of base) | **49.8%** |
+| Bottom 50% of customers | **7.8%** |
 
 </td>
 </tr>
@@ -156,21 +156,21 @@ TenureMonths   = (last purchase month) − (first purchase month) + 1
 ### Check 1 — Customer-Level Pareto
 
 ```
-Top 10% customers  →  61.4% of revenue
-Top 20% customers  →  74.5% of revenue   ✓ Pareto confirmed (≥75% threshold)
+Top 10% customers  →  61.4% of revenue   ✓ exceeds the 45% Pareto-validation threshold
+Top 20% customers  →  74.6% of revenue   ≈ the classic 80/20 concentration
 ```
 
 ### Check 2 — Decile Analysis
 
 ```
 Decile  │  Revenue %  │  Cum. %  │  Interpretation
-────────┼─────────────┼──────────┼──────────────────────────────
-  D1    │    45%+     │   45%+   │  Top 10% spenders
-  D2    │    ~15%     │   ~60%   │  Upper-mid tier
-  D3    │    ~9%      │   ~69%   │  ← Growth ROI zone begins
-  D4    │    ~6%      │   ~75%   │
-  D5    │    ~5%      │   ~80%   │  ← 80% revenue threshold
- D6–D10 │    ~20%     │  100%    │  Bottom 50% — minimal spend
+────────┼─────────────┼──────────┼────────────────────────────────────
+  D1    │    61.4%    │   61.4%  │  Top 10% spenders — the engine
+  D2    │    13.2%    │   74.6%  │  Upper-mid tier
+  D3    │     8.2%    │   82.8%  │  ← 80% already crossed; ROI zone (D3–D5)
+  D4    │     5.5%    │   88.3%  │
+  D5    │     3.9%    │   92.2%  │
+ D6–D10 │     7.8%    │  100.0%  │  Bottom 50% of base — minimal spend
 ```
 
 Both approaches independently confirm the same story: **a small minority of customers accounts for the majority of revenue.**
@@ -206,7 +206,7 @@ where:
 <details>
 <summary><strong>🏆 Champions — Protect & reward (click to expand)</strong></summary>
 
-**Who:** Recently active, very frequent, very high spend. 7.4% of customers, 49.7% of revenue.
+**Who:** Recently active, very frequent, very high spend. 7.4% of customers, 49.8% of revenue.
 
 **Actions:**
 - Priority customer service lane
@@ -317,11 +317,11 @@ SNAPSHOT_DATE = pd.Timestamp("2011-12-10")        # Stable across all re-runs
 ```
 ecommerce-customer-segmentation-rfm-deciles/
 │
-├── 📓 Datacsvfinal_fixed.ipynb      ← Main analysis notebook
-├── 📄 data.csv                      ← Source: UCI Online Retail Dataset
-├── 📄 README.md                     ← This file
+├── 📓 rfm_customer_segmentation.ipynb   ← Main analysis notebook
+├── 📄 data.csv                          ← Source: UCI Online Retail Dataset
+├── 📄 README.md                         ← This file
 │
-└── outputs/                         ← Generated charts (auto-created by notebook)
+└── outputs/                             ← Generated charts (auto-created by notebook)
     ├── monthly_revenue_trend.png
     ├── hourly_patterns.png
     ├── new_vs_returning.png
@@ -339,7 +339,7 @@ ecommerce-customer-segmentation-rfm-deciles/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/arsalanahmed/ecommerce-customer-segmentation-rfm-deciles.git
+git clone https://github.com/arsalqure/ecommerce-customer-segmentation-rfm-deciles.git
 cd ecommerce-customer-segmentation-rfm-deciles
 
 # 2. Install dependencies
@@ -350,7 +350,7 @@ pip install pandas>=2.2.0 numpy>=1.26.0 matplotlib>=3.8.0 seaborn>=0.13.2
 # Dataset: https://archive.ics.uci.edu/dataset/352/online+retail
 
 # 4. Run the notebook
-jupyter notebook Datacsvfinal_fixed.ipynb
+jupyter notebook rfm_customer_segmentation.ipynb
 ```
 
 > The notebook will auto-locate `data.csv` relative to its own directory.
@@ -409,7 +409,7 @@ jupyter notebook Datacsvfinal_fixed.ipynb
 
 ---
 
-**Built by [Arsalan Ahmed](https://github.com/arsalanahmed)**
+**Built by [Arsalan Ahmed](https://github.com/arsalqure)**
 
 *If this project helped you, consider starring the repository ⭐*
 
